@@ -10,6 +10,8 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
+import com.example.myapplication.shared.about.AboutComponent
+import com.example.myapplication.shared.about.DefaultAboutComponent
 import com.example.myapplication.shared.main.DefaultMainComponent
 import com.example.myapplication.shared.main.MainComponent
 import com.example.myapplication.shared.root.RootComponent.Child
@@ -34,16 +36,24 @@ class DefaultRootComponent(
         when (config) {
             is Config.Main -> Child.Main(mainComponent(childComponentContext))
             is Config.Welcome -> Child.Welcome(welcomeComponent(childComponentContext))
+            is Config.About -> Child.About(aboutComponent(childComponentContext))
         }
 
     private fun mainComponent(componentContext: ComponentContext): MainComponent =
         DefaultMainComponent(
             componentContext = componentContext,
             onShowWelcome = { navigation.push(Config.Welcome) },
+            onShowAbout = { navigation.push(Config.About) },
         )
 
     private fun welcomeComponent(componentContext: ComponentContext): WelcomeComponent =
         DefaultWelcomeComponent(
+            componentContext = componentContext,
+            onFinished = navigation::pop,
+        )
+
+    private fun aboutComponent(componentContext: ComponentContext): AboutComponent =
+        DefaultAboutComponent(
             componentContext = componentContext,
             onFinished = navigation::pop,
         )
@@ -58,5 +68,8 @@ class DefaultRootComponent(
 
         @Parcelize
         data object Welcome : Config
+
+        @Parcelize
+        data object About : Config
     }
 }

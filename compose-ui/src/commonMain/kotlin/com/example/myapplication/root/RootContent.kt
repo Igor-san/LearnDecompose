@@ -13,6 +13,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
+import com.example.myapplication.about.AboutContent
 import com.example.myapplication.main.MainContent
 import com.example.myapplication.shared.root.RootComponent
 import com.example.myapplication.shared.root.RootComponent.Child
@@ -33,6 +34,7 @@ fun RootContent(
                 when (val instance = it.instance) {
                     is Child.Main -> MainContent(component = instance.component)
                     is Child.Welcome -> WelcomeContent(component = instance.component)
+                    is Child.About -> AboutContent(component = instance.component)
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.example.myapplication.main
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -24,12 +25,15 @@ internal fun MainContent(
             )
         },
     ) {
-        Box(
+        Column(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Button(onClick = component::onShowWelcomeClicked) {
                 Text(text = "Show Welcome screen")
+            }
+            Button(onClick = component::onShowAboutClicked) {
+                Text(text = "Show About screen")
             }
         }
     }
